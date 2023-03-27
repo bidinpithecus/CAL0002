@@ -71,39 +71,38 @@ int randomNum(int max) {
 	return ((rand() % max) + 1);
 }
 
-unsigned long timeSortingRandomArrays(int arr[], int size, int limit, int numArrays, void (*sortMethod)(int*, int)) {
+unsigned long timeSortingRandomArrays(int v[], int n, int limit, int numArrays, void (*sortMethod)(int*, int)) {
 	unsigned long microSec = 0;
 	unsigned long timeDiff;
 
 	for (int i = 0; i < numArrays; i++) {
-		for (int j = 0; j < size; j++) {
-			arr[j] = randomNum(limit);
+		for (int j = 0; j < n; j++) {
+			v[j] = randomNum(limit);
 		}
 
 		gettimeofday(&startTime, NULL);
-		sortMethod(arr, size);
+		sortMethod(v, n);
 		gettimeofday(&endTime, NULL);
 		timeDiff = (1000000L * endTime.tv_sec + endTime.tv_usec) - (1000000L * startTime.tv_sec + startTime.tv_usec);
-		microSec += (timeDiff % 1000000L);
+		microSec += timeDiff;
 	}
 	return microSec / numArrays;
 }
 
-unsigned long timeSearchingRandomArrays(int arr[], int size, int limit, int numArrays, int key, int (*searchMethod)(int*, int, int)) {
+unsigned long timeSearchingRandomArrays(int v[], int n, int limit, int numArrays, int key, int (*searchMethod)(int*, int, int)) {
 	unsigned long microSec = 0;
 	unsigned long timeDiff;
 
 	for (int i = 0; i < numArrays; i++) {
-		for (int j = 0; j < size; j++) {
-			arr[j] = randomNum(limit);
+		for (int j = 0; j < n; j++) {
+			v[j] = randomNum(limit);
 		}
 
 		gettimeofday(&startTime, NULL);
-		searchMethod(arr, size, key);
+		searchMethod(v, n, key);
 		gettimeofday(&endTime, NULL);
 		timeDiff = (1000000L * endTime.tv_sec + endTime.tv_usec) - (1000000L * startTime.tv_sec + startTime.tv_usec);
-		printf("%ld\n", timeDiff);
-		microSec += (timeDiff % 1000000L);
+		microSec += timeDiff;
 	}
 	return microSec / numArrays;
 }

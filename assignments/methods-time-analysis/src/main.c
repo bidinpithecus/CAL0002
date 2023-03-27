@@ -23,7 +23,7 @@ int main(void) {
 	fprintf(pAvg, HEADER);
 	do {
 		arraySize = randomNum(MAX);
-		v = malloc(sizeof(int) * arraySize);
+		v = (void*) malloc(sizeof(int) * arraySize);
 		fprintf(pAvg, "%d\t", arraySize);
 
 		// inicio bubble sort
