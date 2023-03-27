@@ -42,11 +42,16 @@ main
 searches
 sorts
 
+#ignore folders
+.vscode/
+build/
+
 #  Debug files
 *.dSYM/
 *.su
 *.idb
 *.pdb
+outDebug
 
 # Kernel Module Compile Results
 *.mod*

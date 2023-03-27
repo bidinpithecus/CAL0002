@@ -1,25 +1,26 @@
 #include "sorts.h"
 #include "searches.h"
 
-#define MAX 100
+#define MAX 1000
 #define NUM_RANDOM_ARRAYS 10
-#define EXECUTIONS 2
-#define NUMBER_TO_BE_FIND 10
+#define EXECUTIONS 50
+#define NUMBER_TO_BE_FOUND 100
 
 int main(void) {
-	srand(time(NULL));
-	int time;
+	srand((unsigned int) time(NULL));
+	unsigned long time;
 	int arraySize;
 	int execsMade = 0;
 	int *v = NULL;
 	FILE *pAvg;
 
-	pAvg = fopen("results/avg.txt", "a");
+	pAvg = fopen("results/avg.txt", "w+");
 
 	if(pAvg == NULL) {
 		perror("Error opening file.");
 		exit(-1);
 	}
+	fprintf(pAvg, HEADER);
 	do {
 		arraySize = randomNum(MAX);
 		v = malloc(sizeof(int) * arraySize);
@@ -27,46 +28,40 @@ int main(void) {
 
 		// inicio bubble sort
 		time = timeSortingRandomArrays(v, arraySize, MAX, NUM_RANDOM_ARRAYS, bubbleSort);
-		printf("%d\t", time);
-		fprintf(pAvg, "%d\t", time);
+		fprintf(pAvg, "%ld\t", time);
 		// fim bubble sort
 
 		// inicio insertion sort
 		time = timeSortingRandomArrays(v, arraySize, MAX, NUM_RANDOM_ARRAYS, insertionSort);
-		printf("%d\t", time);
-		fprintf(pAvg, "%d\t", time);
+		fprintf(pAvg, "%ld\t", time);
 		// fim insertion sort
 
 		// inicio heap sort
 		time = timeSortingRandomArrays(v, arraySize, MAX, NUM_RANDOM_ARRAYS, heapSort);
-		printf("%d\t", time);
-		fprintf(pAvg, "%d\t", time);
+		fprintf(pAvg, "%ld\t", time);
 		// fim heap sort
 
 		// inicio merge sort
 		time = timeSortingRandomArrays(v, arraySize, MAX, NUM_RANDOM_ARRAYS, mergeSort);
-		printf("%d\t", time);
-		fprintf(pAvg, "%d\t", time);
+		fprintf(pAvg, "%ld\t", time);
 		// fim merge sort
 
 		// inicio quick sort
 		time = timeSortingRandomArrays(v, arraySize, MAX, NUM_RANDOM_ARRAYS, quickSort);
-		printf("%d\t", time);
-		fprintf(pAvg, "%d\t", time);
+		fprintf(pAvg, "%ld\t", time);
 		// fim quick sort
 
 		// inicio sequential search
-		time = timeSearchingRandomArrays(v, arraySize, MAX, NUM_RANDOM_ARRAYS, NUMBER_TO_BE_FIND, sequentialSearch);
-		printf("%d\t", time);
-		fprintf(pAvg, "%d\t", time);
+		time = timeSearchingRandomArrays(v, arraySize, MAX, NUM_RANDOM_ARRAYS, NUMBER_TO_BE_FOUND, sequentialSearch);
+		fprintf(pAvg, "%ld\t", time);
 		// fim sequential search
 
 		// inicio binary search
-		time = timeSearchingRandomArrays(v, arraySize, MAX, NUM_RANDOM_ARRAYS, NUMBER_TO_BE_FIND, binarySearch);
-		printf("%d\t", time);
-		fprintf(pAvg, "%d\t", time);
+		time = timeSearchingRandomArrays(v, arraySize, MAX, NUM_RANDOM_ARRAYS, NUMBER_TO_BE_FOUND, binarySearch);
+		fprintf(pAvg, "%ld\t", time);
 		// fim binary search
 
+		fprintf(pAvg, "\n");
 		execsMade++;
 	} while (execsMade != EXECUTIONS);
 	free(v);

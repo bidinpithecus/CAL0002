@@ -9,22 +9,28 @@ int sequentialSearch(int v[], int n, int key) {
     return -1;
 }
 
-int binarySearch(int v[], int n, int item) {
-    int begin = 0;
-    int end = n - 1;
+int binarySearch(int v[], int n, int x){
+	int l = 0;
+    while (l <= n) {
+        int m = l + (n - l) / 2;
 
-    while (begin <= end) {
-        int i = (begin + end) / 2;
-        if (v[i] == item) {
-            return i;
-        }
+        // Check if x is present at mid
+        if (v[m] == x) {
+            return m;
+		}
 
-        if (v[i] < item) {
-            begin = i + 1;
-        } else {
-            end = i;
-        }
+        // If x greater, ignore left half
+        if (v[m] < x) {
+            l = m + 1;
+		}
+
+        // If x is smaller, ignore right half
+        else {
+            n = m - 1;
+		}
     }
 
+    // if we reach here, then element was
+    // not present
     return -1;
 }

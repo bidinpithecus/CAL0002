@@ -48,6 +48,8 @@ void merge(int v[], int head, int half, int tail) {
 	for (int i = head, k = 0; i <= tail; i++, k++) {
 		v[i] = aux[k];
 	}
+
+	free(aux);
 }
 
 // função auxiliar do Merge Sort
@@ -100,6 +102,7 @@ unsigned long timeSearchingRandomArrays(int arr[], int size, int limit, int numA
 		searchMethod(arr, size, key);
 		gettimeofday(&endTime, NULL);
 		timeDiff = (1000000L * endTime.tv_sec + endTime.tv_usec) - (1000000L * startTime.tv_sec + startTime.tv_usec);
+		printf("%ld\n", timeDiff);
 		microSec += (timeDiff % 1000000L);
 	}
 	return microSec / numArrays;
@@ -158,4 +161,7 @@ void countingSort(int v[], int n, int exp) {
  	for (int i = 0; i < n; i++){
  		v[i] = output[i];
 	}
+
+	free(output);
+	free(count);
 }
