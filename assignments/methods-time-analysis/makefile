@@ -4,13 +4,14 @@ OBJECTS =  src/utils/helpers.o src/methods/searches.o src/methods/sorts.o src/ma
 BINARYS = main sorts searches helpers *.out
 
 main: $(OBJECTS)
-	@$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
+	$(CC) $(CFLAGS) -o $@ $(OBJECTS) $(LDFLAGS)
+	./main
 
 src/%.o: src/%.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
-graphBuilder: main
-	@python3 src/utils/graph.py
+plot: main
+	python3 src/utils/plot.py
 
 clean:
-	@rm -f $(BINARYS) $(OBJECTS)
+	rm -f $(BINARYS) $(OBJECTS)

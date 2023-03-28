@@ -1,9 +1,9 @@
 #include "methods/sorts.h"
 #include "methods/searches.h"
 
-#define MAX 1000
-#define NUM_RANDOM_ARRAYS 10
-#define EXECUTIONS 50
+#define MAX 5000
+#define NUM_RANDOM_ARRAYS 15
+#define EXECUTIONS 200
 #define NUMBER_TO_BE_FOUND 100
 
 int main(void) {
