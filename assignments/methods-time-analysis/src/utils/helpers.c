@@ -89,13 +89,17 @@ unsigned long timeSortingRandomArrays(int v[], int n, int limit, int numArrays, 
 	return microSec / numArrays;
 }
 
-unsigned long timeSearchingRandomArrays(int v[], int n, int limit, int numArrays, int key, int (*searchMethod)(int*, int, int)) {
+unsigned long timeSearchingRandomArrays(int v[], int n, int limit, int numArrays, int key, int (*searchMethod)(int*, int, int), bool needsToBeOrdered) {
 	unsigned long microSec = 0;
 	unsigned long timeDiff;
 
 	for (int i = 0; i < numArrays; i++) {
 		for (int j = 0; j < n; j++) {
 			v[j] = randomNum(limit);
+		}
+
+		if (needsToBeOrdered) {
+			qsort(v, n, sizeof(int), cmpFunc);
 		}
 
 		gettimeofday(&startTime, NULL);
@@ -138,6 +142,10 @@ int max(int v[], int n) {
     if (v[i] > max)
       max = v[i];
   return max;
+}
+
+int cmpFunc (const void * a, const void * b) {
+   return ( *(int*)a - *(int*)b );
 }
 
 void countingSort(int v[], int n, int exp) {

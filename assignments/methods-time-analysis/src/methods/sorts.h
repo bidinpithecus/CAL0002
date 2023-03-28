@@ -1,7 +1,7 @@
 #ifndef _SORTS_H_
 #define _SORTS_H_
 
-#include "helpers.h"
+#include "../utils/helpers.h"
 
 void bubbleSort (int v[], int n);
 void insertionSort(int v[], int n);
