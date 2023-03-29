@@ -29,4 +29,4 @@ plt.ylabel('Time in us')
 plt.legend()
 
 # Show the graph
-plt.savefig("results/graph.png")
+plt.savefig("results/graph.svg", dpi=300)
