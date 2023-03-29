@@ -15,7 +15,7 @@ void swap(int v[], int i, int j);
 void heapify(int v[], int n, int i);
 void merge(int v[], int head, int half, int tail);
 void halfMergeSort(int v[], int head, int tail);
-int randomNum(int max);
+unsigned int randomNum(int max);
 unsigned long timeSortingRandomArrays(int v[], int n, int limit, int numArrays, void (*sortMethod)(int*, int));
 unsigned long timeSearchingRandomArrays(int v[], int n, int limit, int numArrays, int key, int (*searchMethod)(int*, int, int), bool needsToBeOrdered);
 int partition(int v[], int head, int tail);

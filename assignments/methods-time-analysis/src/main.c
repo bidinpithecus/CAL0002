@@ -3,7 +3,7 @@
 
 #define MAX 5000
 #define NUM_RANDOM_ARRAYS 15
-#define EXECUTIONS 200
+#define EXECUTIONS 500
 #define NUMBER_TO_BE_FOUND 100
 
 int main(void) {

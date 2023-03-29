@@ -67,8 +67,17 @@ void halfMergeSort(int v[], int head, int tail) {
 }
 
 // funcao que gera um numero pseudo-aleatorio
-int randomNum(int max) {
-	return ((rand() % max) + 1);
+unsigned int randomNum(int max) {
+	FILE* fPtr;
+	unsigned int num;
+
+	fPtr = fopen("/dev/random", "r");
+	fread(&num, sizeof(num), 1, fPtr);
+	fclose(fPtr);
+
+	num %= max + 1;
+
+	return num;
 }
 
 unsigned long timeSortingRandomArrays(int v[], int n, int limit, int numArrays, void (*sortMethod)(int*, int)) {
