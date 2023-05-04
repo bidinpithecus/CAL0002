@@ -17,9 +17,12 @@ $(SRC_DIR)/%.o: $(SRC_DIR)/%.cpp $(SRC_DIR)/%.hpp
 	$(CPP) $(CPPFLAGS) -c $< -o $@
 
 # Clean up object files and executable
-.PHONY: clean clear
+.PHONY: clean view
 clean:
 	rm -f $(OBJECTS) $(BINARY)
+
+cleanAll:
+	rm -f $(OBJECTS) $(BINARY) data/*
 
 plot: data/graph.svg
 
@@ -28,4 +31,6 @@ data/graph.dot: $(BINARY)
 
 data/graph.svg: data/graph.dot
 	dot -Tsvg $< > $@
-	nomacs $@
+
+view: data/graph.svg
+	nomacs $<

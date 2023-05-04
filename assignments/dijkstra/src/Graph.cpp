@@ -33,7 +33,7 @@ void Graph::dot(vector<iPair> shortestPath) {
     dotFile << endl;
 
     set<pair<int, int>> path;
-    for (int i = 0; i < shortestPath.size(); i++) {
+    for (long unsigned int i = 0; i < shortestPath.size(); i++) {
         int v = shortestPath[i].first;
         int u = shortestPath[i].second;
         path.insert(make_pair(v, u));
