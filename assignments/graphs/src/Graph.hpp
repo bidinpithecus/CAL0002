@@ -6,11 +6,12 @@
 #include <list>
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 using namespace std;
 #define INF 0x3f3f3f3f
-#define DOT_PATH "data/graph.dot"
-#define SVG_PATH "data/graph.svg"
+#define DOT_MINIMUM_PATH "data/dijkstra.dot"
+#define DOT_DFS_PATH "data/dfs.dot"
 
 typedef pair<int, int> iPair;
 typedef pair<int, vector<iPair>> ivPair;
@@ -23,10 +24,13 @@ class Graph {
 public:
 	Graph(int V);
 	void addEdge(int u, int v, int w);
-	void dot(vector<iPair> shortestPath);
+	void dotDijkstra(vector<iPair> shortestPath);
+	void dotDfs(vector<int> path);
 	void printAdjacencies();
 
-	ivPair shortestPath(int s, int d);
+	ivPair dijkstra(int s, int d);
+	vector<int> dfs(int s, int d);
+	vector<int> dfsUtil(int v, bool visited[], int dest);
 };
 
 #endif

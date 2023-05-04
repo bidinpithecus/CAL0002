@@ -16,7 +16,7 @@ int main() {
 	int src = 0;
 	int dest = 7;
 
-	ivPair result = g.shortestPath(src, dest);
+	ivPair result = g.dijkstra(src, dest);
 
     cout << "The shortest distance from " << src  << " to " << dest << " is: " << result.first << endl;
 
@@ -24,7 +24,17 @@ int main() {
 		cout << "(" << vertex.first << ", " << vertex.second << ")" << endl;
 	}
 
-	g.dot(result.second);
+	g.dotDijkstra(result.second);
+
+	vector<int> path = g.dfs(src, dest);
+
+	cout << "Path found: ";
+	for (int node : path) {
+		cout << node << " ";
+	}
+	cout << endl;
+
+	g.dotDfs(path);
 
     return 0;
 }

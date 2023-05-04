@@ -24,13 +24,16 @@ clean:
 cleanAll:
 	rm -f $(OBJECTS) $(BINARY) data/*
 
-plot: data/graph.svg
+plot: data/dfs.svg data/dijkstra.svg
 
-data/graph.dot: $(BINARY)
+data/dfs.dot: $(BINARY)
 	./$(BINARY)
 
-data/graph.svg: data/graph.dot
+data/dfs.svg: data/dfs.dot
 	dot -Tsvg $< > $@
 
-view: data/graph.svg
-	nomacs $<
+data/dijkstra.dot: $(BINARY)
+	./$(BINARY)
+
+data/dijkstra.svg: data/dijkstra.dot
+	dot -Tsvg $< > $@

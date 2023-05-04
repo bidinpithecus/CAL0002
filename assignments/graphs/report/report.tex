@@ -1,0 +1,32 @@
+\documentclass{article}
+
+\usepackage{listings}
+
+\title{Implementação dos algoritmos {\it Dijkstra\/} e DFS sobre grafos}
+\author{\sc{Paulo Ricardo \& Vinícios Bidin}}
+\date{4 de maio de 2023}
+
+\begin{document}
+
+    \maketitle
+
+    \section{Introdução}
+        \paragraph{} Trata-se de um projeto que tem como proposta a implementação dos algoritmos {\it Dijkstra} e DFS ou {(\it Depth First Search)} sobre grafos. Sendo o primeiro para busca do caminho mínimo entre um dois vértices, especificamente para grafos ponderados, e o segundo uma busca em produndidade.
+		\par O grafo em que estes algoritmos é aplicado se trata de um grafo pequeno com oito vértices que representam paradas de ônibus e as arestas com seus pesos as possíveis distâncias entre esses.
+
+		\section{Compilação}
+			\subsection{Dependências}
+				\paragraph{} São dependências do projeto, a biblioteca {\it Graphviz} sendo utilizada a linguagem {\it Dot} para a visualização do grafo gerado, utiliza-se ainda o {\it Makefile} para compilação de todo o projeto, para que não seja necessário ficar compilando os arquivos de forma individual.
+
+			\subsection{Compilação}
+				\paragraph{} Uma vez no diretório do projeto, compile, utilizando {\it make}.
+				Outra maneira, é utilizando o comando {\it make run}. Desta forma, além de compilar, o binário {\it main} será executado, gerando os arquivos `data/dfs.dot` e `data/dijkstra.dot`.
+				Ainda, utilizando o comando {\it make plot}, além de compilado e executado, os vetores {\it (Scalable Vector Graphics)} ou {\it (svg)} serão gerados, seus caminhos serão `data/dfs.svg` e `data/dijkstra.svg`.
+
+			\subsection{Execução}
+				\paragraph{} Para executar, basta executar o arquivo binário de saída {\it main}, utilizando o comando {\it ./main}. Após feito, assim como rodando o comando {\it make run}, os arquivos {\it .dot} serão gerados, precisando então gerar os vetores a partir destes.
+
+		\section{Resultados}
+			\paragraph{}
+
+\end{document}

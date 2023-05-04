@@ -22,8 +22,8 @@ void Graph::printAdjacencies() {
 	}
 }
 
-void Graph::dot(vector<iPair> shortestPath) {
-    ofstream dotFile(DOT_PATH);
+void Graph::dotDijkstra(vector<iPair> shortestPath) {
+    ofstream dotFile(DOT_MINIMUM_PATH);
 
     dotFile << "strict graph BusStops {" << endl;
     for (int v = 0; v < V; v++) {
@@ -50,9 +50,9 @@ void Graph::dot(vector<iPair> shortestPath) {
             int w = it->second;
 
             if (path.count(make_pair(v, u)) || path.count(make_pair(u, v))) {
-                dotFile << "\t" << v << " -- " << u << " [color = red, label = " << w << "]" << endl;
+                dotFile << "\t" << v << " -- " << u << " [color = \"#aa0000\", label = " << w << "];" << endl;
             } else {
-                dotFile << "\t" << v << " -- " << u << " [label = " << w << "]" << endl;
+                dotFile << "\t" << v << " -- " << u << " [label = " << w << "];" << endl;
             }
         }
     }
@@ -62,8 +62,35 @@ void Graph::dot(vector<iPair> shortestPath) {
     dotFile.close();
 }
 
+void Graph::dotDfs(vector<int> path) {
+    ofstream dotFile(DOT_DFS_PATH);
 
-ivPair Graph::shortestPath(int src, int dest) {
+    dotFile << "strict graph BusStops {" << endl;
+    for (int v = 0; v < V; v++) {
+        if (find(path.begin(), path.end(), v) != path.end()) {
+            dotFile << "\tnode [shape = circle, style = filled, color = \"" << "#aa0000" << "\"]; " << v << ";" << endl;
+        } else {
+            dotFile << "\tnode [shape = circle, style = filled, color = \"" << "#28d1e0" << "\"]; " << v << ";" << endl;
+        }
+    }
+
+    dotFile << endl;
+
+    for (int v = 0; v < V; ++v) {
+        int i = 0;
+        for (auto it = adj[v].begin(); it != adj[v].end(); it++, i++) {
+            int u = it->first;
+            dotFile << "\t" << v << " -- " << u << endl;
+        }
+    }
+
+    dotFile << "}" << endl;
+
+    dotFile.close();
+}
+
+
+ivPair Graph::dijkstra(int src, int dest) {
     priority_queue<iPair, vector<iPair>, greater<iPair>> priorityQueue;
 
     vector<int> dist(V, INF);
@@ -99,4 +126,34 @@ ivPair Graph::shortestPath(int src, int dest) {
     }
 
     return make_pair(dist[dest], path);
+}
+
+vector<int> Graph::dfsUtil(int v, bool visited[], int dest) {
+    visited[v] = true;
+    vector<int> path = {v};
+
+    if (v == dest) {
+        return path;
+    }
+
+    for (auto it = adj[v].begin(); it != adj[v].end(); it++) {
+        int u = it->first;
+        if (!visited[u]) {
+            vector<int> subpath = dfsUtil(u, visited, dest);
+            if (!subpath.empty()) {
+                path.insert(path.end(), subpath.begin(), subpath.end());
+                return path;
+            }
+        }
+    }
+
+    return {};
+}
+
+vector<int> Graph::dfs(int src, int dest) {
+	bool visited[V];
+	for (int i = 0; i < V; ++i) {
+		visited[i] = false;
+	}
+    return dfsUtil(src, visited, dest);
 }
