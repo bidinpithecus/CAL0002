@@ -26,6 +26,7 @@ void Graph::dotDijkstra(vector<iPair> shortestPath) {
     ofstream dotFile(DOT_MINIMUM_PATH);
 
     dotFile << "strict graph BusStops {" << endl;
+	dotFile << "\tsplines = line" << endl;
     for (int v = 0; v < V; v++) {
         dotFile << "\tnode [shape = circle, style = filled, color = \"" << "#28d1e0" << "\"]; " << v << ";" << endl;
     }

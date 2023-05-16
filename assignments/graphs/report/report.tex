@@ -1,32 +1,56 @@
 \documentclass{article}
-
+\usepackage[brazil]{babel}
+\usepackage{pdfx}
+\usepackage{bookmark}
+\usepackage{float}
+\usepackage{svg}
+\svgpath{{../data}}
 \usepackage{listings}
 
 \title{Implementação dos algoritmos {\it Dijkstra\/} e DFS sobre grafos}
 \author{\sc{Paulo Ricardo \& Vinícios Bidin}}
-\date{4 de maio de 2023}
+\date{16 de maio de 2023}
 
 \begin{document}
 
     \maketitle
+	\tableofcontents
 
     \section{Introdução}
-        \paragraph{} Trata-se de um projeto que tem como proposta a implementação dos algoritmos {\it Dijkstra} e DFS ou {(\it Depth First Search)} sobre grafos. Sendo o primeiro para busca do caminho mínimo entre um dois vértices, especificamente para grafos ponderados, e o segundo uma busca em produndidade.
-		\par O grafo em que estes algoritmos é aplicado se trata de um grafo pequeno com oito vértices que representam paradas de ônibus e as arestas com seus pesos as possíveis distâncias entre esses.
+        \paragraph{} Trata-se de um projeto que tem como proposta a implementação dos algoritmos {\it Dijkstra} e DFS ou {(\it Depth First Search)} sobre grafos. Sendo o primeiro para busca do caminho mínimo entre dois vértices, especificamente para grafos ponderados, e o segundo uma busca em produndidade.
+		\par O grafo em que estes algoritmos é aplicado se trata de um grafo pequeno com somente oito vértices que representam paradas de ônibus e as arestas com seus pesos, as distâncias entre esses.
 
-		\section{Compilação}
+		\section{Compilação e Execução}
 			\subsection{Dependências}
 				\paragraph{} São dependências do projeto, a biblioteca {\it Graphviz} sendo utilizada a linguagem {\it Dot} para a visualização do grafo gerado, utiliza-se ainda o {\it Makefile} para compilação de todo o projeto, para que não seja necessário ficar compilando os arquivos de forma individual.
 
 			\subsection{Compilação}
-				\paragraph{} Uma vez no diretório do projeto, compile, utilizando {\it make}.
-				Outra maneira, é utilizando o comando {\it make run}. Desta forma, além de compilar, o binário {\it main} será executado, gerando os arquivos `data/dfs.dot` e `data/dijkstra.dot`.
-				Ainda, utilizando o comando {\it make plot}, além de compilado e executado, os vetores {\it (Scalable Vector Graphics)} ou {\it (svg)} serão gerados, seus caminhos serão `data/dfs.svg` e `data/dijkstra.svg`.
+				\paragraph{} Uma vez no diretório do projeto, compile, utilizando \texttt{make}.
+				Outra maneira, é utilizando o comando \texttt{make run}. Desta forma, além de compilar, o binário \texttt{main} será executado, gerando os arquivos ``data/dfs.dot'' e ``data/dijkstra.dot''.
+				Ainda, utilizando o comando \texttt{make plot}, além de compilado e executado, os vetores {\it (Scalable Vector Graphics)} ou {\it (svg)} serão gerados, seus caminhos serão ``data/dfs.svg" e ``data/dijkstra.svg".
 
 			\subsection{Execução}
-				\paragraph{} Para executar, basta executar o arquivo binário de saída {\it main}, utilizando o comando {\it ./main}. Após feito, assim como rodando o comando {\it make run}, os arquivos {\it .dot} serão gerados, precisando então gerar os vetores a partir destes.
+				\paragraph{} Para executar, basta executar o arquivo binário de saída \texttt{main}, utilizando o comando \texttt{./main}. Após feito, assim como rodando o comando \texttt{make run}, os arquivos {\it .dot} serão gerados, precisando então gerar os vetores a partir destes.
 
 		\section{Resultados}
-			\paragraph{}
+			\subsection{Dijkstra}
+				\paragraph{} O algoritmo de {\it Dijkstra}, dado um grafo ponderado e os vértices de origem e destino, encontrará o melhor caminho tendo este, o menor custo possível. Isto é feito com o auxílio de uma lista de prioridades de vértices e suas distâncias ao vértice de origem. Inicialmente com exceção do vértice de origem que possui 0, todos os demais vértices são marcados com uma distância inifinita. Repeditamente, o algoritmo seleciona o vértice com a menor distância e verifica todos os vizinhos (vértices alcançáveis com um passo deste), e atualizando suas distâncias caso uma distância menor é encontrada. Este processo é feito até que o vértice de destino seja alcançado. Sua complexidade temporal pode ser limitada tanto inferior quanto superiormente pela função $\Theta$($|E| + |V|lg|V|$), sendo $|E|$ o número de arestas no grafo e $|V|$ o número de vértices.
+				\par{} Segue a representação do grafo descrito feito com o auxílio do {\it Graphviz}, como mencionado anteriormente. Neste grafo, o caminho mínimo do vértice de origem {\it 0} ao vértice de destino {\it 7} está destacado.
+				\begin{figure}[H]
+					\centering
+					\includesvg{dijkstra}
+					\caption{Caminho mínimo de {\it Dijkstra}}
+					\label{fig:dijkstra}
+				\end{figure}
+
+				\subsection{DFS}
+					\paragraph{} A busca em profundidade (DFS) é um algoritmo de travessia de grafos que explora o máximo possível ao longo de cada ramificação antes de retroceder. Ele começa em um nó escolhido e visita todos os seus vizinhos, em seguida, recursivamente, explora os vizinhos ainda não visitados até que não os haja mais. Utiliza um vetor para manter o controle dos nós a serem visitados. Inicialmente, o nó de partida é inserido no vetor. Em cada passo, um nó é removido do vetor e marcado como visitado. Em seguida, todos os seus vizinhos não visitados são inseridos na vetor. Esse processo continua até que o vetor esteja vazio, indicando que todos os nós foram visitados. Para tal, a complexidade temporal pode ser definida por $O(|V| + |E|)$, onde $|V|$ é o número de vértices no grafo e $|E|$ o número de arestas deste.
+					\par{} Na figura a seguir, tem-se representado o mesmo grafo apresentado anteriormente, porém desta vez sem peso nas arestas, e ainda, destacado da cor vermelha tem-se os vértices visitados para fazer uma busca em profundidade do nó {\it 0} até novamente o nó {\it 7}.
+					\begin{figure}[H]
+						\centering
+						\includesvg{dfs}
+						\caption{Busca em profundidade}
+						\label{fig:DFS}
+					\end{figure}
 
 \end{document}

@@ -25,6 +25,7 @@ cleanAll:
 	rm -f $(OBJECTS) $(BINARY) data/*
 
 plot: data/dfs.svg data/dijkstra.svg
+	cd report/ && pdflatex --shell-escape -interaction=nonstopmode report.tex && cd ..
 
 data/dfs.dot: $(BINARY)
 	./$(BINARY)

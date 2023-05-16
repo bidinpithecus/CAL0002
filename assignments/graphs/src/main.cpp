@@ -7,7 +7,6 @@ int main() {
     g.addEdge(0, 2, 10);
     g.addEdge(1, 3, 8);
     g.addEdge(1, 4, 4);
-    g.addEdge(2, 4, 6);
     g.addEdge(3, 5, 7);
     g.addEdge(4, 5, 3);
     g.addEdge(2, 6, 12);
