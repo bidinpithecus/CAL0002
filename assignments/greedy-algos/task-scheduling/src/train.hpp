@@ -2,6 +2,7 @@
 #define _TRAIN_HPP_
 
 #include <vector>
+#include <algorithm>
 
 struct Time {
 	int hours;
@@ -21,19 +22,23 @@ struct Train {
 };
 
 struct Station {
-	int numOfTrains;
-	int numOfPlatforms;
+	size_t numOfTrains;
+	size_t numOfPlatforms;
 	std::vector<Train> trains;
 
 	Station() {}
-	Station(int numT, int numP) : numOfTrains(numT), numOfPlatforms(numP) { trains[numT]; }
-	Station(int numT, int numP, std::vector<Train> trains) : numOfTrains(numT), numOfPlatforms(numP) {
+	Station(size_t numT, size_t numP) : numOfTrains(numT), numOfPlatforms(numP) { trains.assign(numT, Train()); }
+	Station(size_t numT, size_t numP, std::vector<Train> trains) : numOfTrains(numT), numOfPlatforms(numP) {
 		if (numT >= trains.size()) this->trains = trains;
 	}
 
 	bool addTrain(Train train) {
-		if (numOfTrains >= trains.size()) return false;
-		else trains.push_back(train); return true;
+		if (numOfTrains >= trains.size()) {
+			return false;
+		} else {
+			trains.push_back(train);
+			return true;
+		}
 	}
 };
 
